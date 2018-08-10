@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Schedule An Appointment</h3>
+            <form th:action="@{/appointment/create}" method="post" id="appointmentForm">
+                <input type="hidden" name="id" th:value="${appointment.id}"/>
+
+                <div class="form-group">
+                    <label for="dateString">Pick a Date and Time:</label>
+                    <div class="input-append date form_datetime input-group" data-date="2017-01-20T15:25:00Z">
+                        <input class="form-control" type="text" value="" readonly="readonly"
+                               th:value="${dateString}" name="dateString"
+                               id="dateString" required="required"/>
+                        <span class="input-group-addon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Pick a location:</label>
+                    <select class="form-control" th:value="${appointment.location}" name="location" id="location"
+                    >
+                        <option disabled="disabled" selected="selected"> -- select the location --</option>
+                        <option>Helsinki</option>
+                        <option>Turku</option>
+                        <option>Tampere</option>
+                        <option>Oulu</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Notes:</label>
+                    <textarea th:value="${appointment.description}" class="form-control" name="description"
+                              id="description" placeholder="Description"></textarea>
+                </div>
+
+
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+
+                <a class="btn btn-primary" id="submitAppointment">Submit Scheduling</a>
+            </form>
+
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+    <br/>
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>
