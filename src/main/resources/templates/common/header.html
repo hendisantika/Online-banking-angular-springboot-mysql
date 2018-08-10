@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head th:fragment="common-header">
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>User Front</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'/>
+
+    <!--bootstrap date-time picker-->
+    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+
+    <!--data table-->
+    <link href="/css/jquery.dataTable.min.css" rel="stylesheet"/>
+    <link href="/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <!--<link href="css/scrolling-nav.css" rel="stylesheet" />-->
+    <link href="/css/main.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<div th:fragment="navbar">
+    <img class="img-responsive" src="/images/banner.png" alt="banner"/>
+
+    <nav class="navbar navbar-default " role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" th:href="@{/userFront}">Home</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse  navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Accounts <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/account/primaryAccount}">Primary</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a th:href="@{/account/savingsAccount}">Savings</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Transfer <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/transfer/betweenAccounts}">Between Accounts</a></li>
+                            <li><a th:href="@{/transfer/toSomeoneElse}">To Someone Else</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a th:href="@{/transfer/recipient}">Add/Edit Recipient</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Appointment <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/appointment/create}">Schedule an Appointment</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Me <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/user/profile}">Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a th:href="@{/logout}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+</div>
+
+<div th:fragment="body-bottom-scripts">
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script src="/js/jquery.easing.min.js"></script>
+
+    <!--bootstrap date-time picker-->
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!--bootbox-->
+    <script src="/js/bootbox.min.js"></script>
+
+    <!--data table-->
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/dataTables.bootstrap.min.js"></script>
+
+    <!--main js-->
+    <script src="/js/main.js"></script>
+</div>
+
+</body>
+</html>
