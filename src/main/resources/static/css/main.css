@@ -1,0 +1,296 @@
+body {
+    background-color: transparent;
+}
+
+html {
+    background: url("/images/bg.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.form-basic {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 55px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    font: bold 14px sans-serif;
+    text-align: center;
+}
+
+.form-basic .form-row {
+    text-align: left;
+    margin-bottom: 22px;
+}
+
+.form-basic .form-title-row {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+/* The form title */
+.form-basic h1 {
+    display: inline-block;
+    box-sizing: border-box;
+    color: #4c565e;
+    font-size: 24px;
+    padding: 0 10px 15px;
+    border-bottom: 2px solid #6caee0;
+    margin: 0;
+}
+
+.form-basic .form-row > label span {
+    display: inline-block;
+    box-sizing: border-box;
+    color: #5F5F5F;
+    width: 180px;
+    text-align: right;
+    vertical-align: top;
+    padding: 12px 25px;
+}
+
+.form-basic input {
+    color: #5f5f5f;
+    box-sizing: border-box;
+    width: 240px;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    padding: 12px;
+    border: 1px solid #dbdbdb;
+}
+
+.form-basic input[type=radio], .form-basic input[type=checkbox] {
+    box-shadow: none;
+    width: auto;
+}
+
+.form-basic input[type=checkbox] {
+    margin-top: 13px;
+}
+
+.form-basic select {
+    background-color: #ffffff;
+    color: #5f5f5f;
+    box-sizing: border-box;
+    max-width: 240px;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    padding: 12px 8px;
+    border: 1px solid #dbdbdb;
+}
+
+.form-basic textarea {
+    color: #5f5f5f;
+    box-sizing: border-box;
+    width: 240px;
+    height: 80px;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    font: normal 13px sans-serif;
+    padding: 12px;
+    border: 1px solid #dbdbdb;
+    resize: vertical;
+}
+
+.form-basic .form-radio-buttons {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.form-basic .form-radio-buttons > div {
+    margin-top: 10px;
+}
+
+.form-basic .form-radio-buttons label span {
+    margin-left: 8px;
+    color: #5f5f5f;
+    font-weight: normal;
+}
+
+.form-basic .form-radio-buttons input {
+    width: auto;
+}
+
+.form-basic button {
+    display: block;
+    border-radius: 2px;
+    background-color: #6caee0;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    padding: 14px 22px;
+    border: 0;
+    margin: 40px 183px 0;
+}
+
+/*	Making the form responsive. Remove this media query
+    if you don't need the form to work on mobile devices. */
+@media ( max-width: 600px) {
+    .form-basic {
+        padding: 30px;
+        max-width: 480px;
+    }
+
+    .form-basic .form-row {
+        max-width: 300px;
+        margin: 25px auto;
+        text-align: left;
+    }
+
+    .form-basic .form-title-row {
+        margin-bottom: 50px;
+    }
+
+    .form-basic .form-row > label span {
+        display: block;
+        text-align: left;
+        padding: 0 0 15px;
+    }
+
+    .form-basic select {
+        width: 240px;
+    }
+
+    .form-basic input[type=checkbox] {
+        margin-top: 0;
+    }
+
+    .form-basic .form-radio-buttons > div {
+        margin: 0 0 10px;
+    }
+
+    .form-basic button {
+        margin: 0;
+    }
+}
+
+.main {
+    margin-top: 70px;
+}
+
+.main-center {
+    margin-top: 30px;
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 40px 40px;
+}
+
+.responstable {
+    margin: 1em 0;
+    width: 100%;
+    overflow: hidden;
+    background: #FFF;
+    color: #024457;
+    border-radius: 10px;
+    border: 1px solid #167F92;
+}
+
+.responstable tr {
+    border: 1px solid #D9E4E6;
+}
+
+.responstable tr:nth-child(odd) {
+    background-color: #EAF3F3;
+}
+
+.responstable th {
+    display: none;
+    border: 1px solid #FFF;
+    background-color: #167F92;
+    color: #FFF;
+    padding: 1em;
+}
+
+.responstable th:first-child {
+    display: table-cell;
+    text-align: center;
+}
+
+.responstable th:nth-child(2) {
+    display: table-cell;
+}
+
+.responstable th:nth-child(2) span {
+    display: none;
+}
+
+.responstable th:nth-child(2):after {
+    content: attr(data-th);
+}
+
+@media ( min-width: 480px) {
+    .responstable th:nth-child(2) span {
+        display: block;
+    }
+
+    .responstable th:nth-child(2):after {
+        display: none;
+    }
+}
+
+.responstable td {
+    display: block;
+    word-wrap: break-word;
+    max-width: 7em;
+}
+
+.responstable td:first-child {
+    display: table-cell;
+    text-align: center;
+    border-right: 1px solid #D9E4E6;
+}
+
+@media ( min-width: 480px) {
+    .responstable td {
+        border: 1px solid #D9E4E6;
+    }
+}
+
+.responstable th, .responstable td {
+    text-align: left;
+    margin: .5em 1em;
+}
+
+@media ( min-width: 480px) {
+    .responstable th, .responstable td {
+        display: table-cell;
+        padding: 1em;
+    }
+}
+
+body {
+    padding: 0 2em;
+    font-family: Arial, sans-serif;
+    color: #024457;
+    /*background: #f2f2f2;*/
+}
+
+h1 {
+    font-family: Verdana;
+    font-weight: normal;
+    /*color: #024457;*/
+}
+
+h1 span {
+    color: #167F92;
+}
+
+.box {
+    border: 2px solid red;
+}
+
+hr {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #EEEEEE -moz-use-text-color #FFFFFF;
+    border-style: solid none;
+    border-width: 1px 0;
+    margin: 18px 0;
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
