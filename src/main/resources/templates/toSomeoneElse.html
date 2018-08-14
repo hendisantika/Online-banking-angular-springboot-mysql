@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+    <div class="row">
+        <div class="col-md-6">
+            <form th:action="@{/transfer/toSomeoneElse}" method="post">
+                <div class="form-group">
+                    <label for="recipientName">1. Please choose the recipient:</label>
+                    <select class="form-control" th:value="${recipientName}" name="recipientName" id="recipientName"
+                            required="required">
+                        <option disabled="disabled" selected="selected"> -- select the recipient --</option>
+                        <option data-th-each="eachRecipient : ${recipientList}"
+                                data-th-text="${eachRecipient.name}"></option>
+                    </select>
+                    <br/>
+                </div>
+
+                <div class="form-group">
+                    <label for="accountType">2. Please select the account you would like to transfer from:</label>
+                    <select class="form-control" th:value="${accountType}" name="accountType" id="accountType"
+                            required="required">
+                        <option disabled="disabled" selected="selected"> -- select your account --</option>
+                        <option>Primary</option>
+                        <option>Savings</option>
+                    </select>
+                    <br/>
+                </div>
+
+                <div class="form-group">
+                    <label>3. Please specify the amount you would like to transfer: </label>
+                    <span class="input-group-addon">Amount $</span>
+                    <input th:value="${amount}" type="text" name="amount" id="amount" class="form-control"
+                           aria-label="Amount (to the nearest dollar)"/>
+                </div>
+
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Transfer</button>
+            </form>
+
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>
