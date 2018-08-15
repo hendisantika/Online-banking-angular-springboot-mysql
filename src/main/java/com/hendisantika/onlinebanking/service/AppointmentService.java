@@ -3,7 +3,6 @@ package com.hendisantika.onlinebanking.service;
 import com.hendisantika.onlinebanking.entity.Appointment;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,7 +20,7 @@ public interface AppointmentService {
 
     List<Appointment> findAll();
 
-    Optional<Appointment> findAppointment(Long id);
+    Appointment findAppointment(Long id);
 
     void confirmAppointment(Long id);
 }

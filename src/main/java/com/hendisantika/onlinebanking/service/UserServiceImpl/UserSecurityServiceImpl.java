@@ -21,9 +21,9 @@ import org.springframework.stereotype.Service;
  * To change this template use File | Settings | File Templates.
  */
 @Service
-public class UserSecurityService implements UserDetailsService {
+public class UserSecurityServiceImpl implements UserDetailsService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserSecurityService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserSecurityServiceImpl.class);
 
     @Autowired
     private UserDao userDao;

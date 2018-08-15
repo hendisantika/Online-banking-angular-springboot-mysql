@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,12 +32,12 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentDao.findAll();
     }
 
-    public Optional<Appointment> findAppointment(Long id) {
-        return appointmentDao.findById(id);
+    public Appointment findAppointment(Long id) {
+        return appointmentDao.findOne(id);
     }
 
     public void confirmAppointment(Long id) {
-        Optional<Appointment> appointment = findAppointment(id);
+        Appointment appointment = findAppointment(id);
         appointment.setConfirmed(true);
         appointmentDao.save(appointment);
     }
