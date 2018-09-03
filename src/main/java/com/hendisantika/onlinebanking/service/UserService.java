@@ -2,6 +2,7 @@ package com.hendisantika.onlinebanking.service;
 
 import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.security.UserRole;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ import java.util.Set;
  * Time: 04.34
  * To change this template use File | Settings | File Templates.
  */
+@Service("userDetailsService")
 public interface UserService {
 
     User findByUsername(String username);
