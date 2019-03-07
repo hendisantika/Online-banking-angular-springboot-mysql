@@ -10,6 +10,12 @@ html {
     background-size: cover;
 }
 
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .form-basic {
     max-width: 640px;
     margin: 0 auto;
