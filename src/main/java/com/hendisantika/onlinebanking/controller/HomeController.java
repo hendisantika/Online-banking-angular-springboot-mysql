@@ -9,9 +9,10 @@ import com.hendisantika.onlinebanking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
 import java.util.HashSet;
@@ -46,7 +47,7 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    @GetMapping("/signup")
     public String signup(Model model) {
         User user = new User();
 
@@ -55,7 +56,7 @@ public class HomeController {
         return "signup";
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    @PostMapping("/signup")
     public String signupPost(@ModelAttribute("user") User user, Model model) {
 
         if (userService.checkUserExists(user.getUsername(), user.getEmail())) {
@@ -79,7 +80,7 @@ public class HomeController {
         }
     }
 
-    @RequestMapping("/userFront")
+    @GetMapping("/userFront")
     public String userFront(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
         PrimaryAccount primaryAccount = user.getPrimaryAccount();
