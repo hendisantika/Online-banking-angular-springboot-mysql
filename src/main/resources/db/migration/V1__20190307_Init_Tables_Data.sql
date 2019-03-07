@@ -69,7 +69,7 @@ CREATE TABLE `primary_account` (
 
 LOCK TABLES `primary_account` WRITE;
 /*!40000 ALTER TABLE `primary_account` DISABLE KEYS */;
-INSERT INTO `primary_account` VALUES (1,1700.00,11223146),(2,0.00,11223150);
+INSERT INTO `primary_account` VALUES (1,1700.00,11223101),(2,0.00,11223101);
 /*!40000 ALTER TABLE `primary_account` ENABLE KEYS */;
 UNLOCK TABLES;
 

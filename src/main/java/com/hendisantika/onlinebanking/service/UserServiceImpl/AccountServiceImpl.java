@@ -1,10 +1,6 @@
 package com.hendisantika.onlinebanking.service.UserServiceImpl;
 
-import com.hendisantika.onlinebanking.entity.PrimaryAccount;
-import com.hendisantika.onlinebanking.entity.PrimaryTransaction;
-import com.hendisantika.onlinebanking.entity.SavingsAccount;
-import com.hendisantika.onlinebanking.entity.SavingsTransaction;
-import com.hendisantika.onlinebanking.entity.User;
+import com.hendisantika.onlinebanking.entity.*;
 import com.hendisantika.onlinebanking.repository.PrimaryAccountDao;
 import com.hendisantika.onlinebanking.repository.SavingsAccountDao;
 import com.hendisantika.onlinebanking.service.AccountService;
@@ -30,7 +26,7 @@ import java.util.Date;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private static int nextAccountNumber = 11223145;
+    private static int nextAccountNumber = 11223101;
 
     @Autowired
     private PrimaryAccountDao primaryAccountDao;
