@@ -5,9 +5,10 @@ import com.hendisantika.onlinebanking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
 
@@ -28,7 +29,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @GetMapping("/profile")
     public String profile(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
 
@@ -37,7 +38,7 @@ public class UserController {
         return "profile";
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    @PostMapping("/profile")
     public String profilePost(@ModelAttribute("user") User newUser, Model model) {
         User user = userService.findByUsername(newUser.getUsername());
         user.setUsername(newUser.getUsername());

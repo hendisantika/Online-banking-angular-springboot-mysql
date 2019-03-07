@@ -69,7 +69,7 @@ CREATE TABLE `primary_account` (
 
 LOCK TABLES `primary_account` WRITE;
 /*!40000 ALTER TABLE `primary_account` DISABLE KEYS */;
-INSERT INTO `primary_account` VALUES (1,1700.00,11223146),(3,0.00,11223150);
+INSERT INTO `primary_account` VALUES (1,1700.00,11223146),(2,0.00,11223150);
 /*!40000 ALTER TABLE `primary_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +191,7 @@ CREATE TABLE `savings_account` (
 
 LOCK TABLES `savings_account` WRITE;
 /*!40000 ALTER TABLE `savings_account` DISABLE KEYS */;
-INSERT INTO `savings_account` VALUES (1,4250.00,11223147),(3,0.00,11223151);
+INSERT INTO `savings_account` VALUES (1,4250.00,11223147),(2,0.00,11223151);
 /*!40000 ALTER TABLE `savings_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
