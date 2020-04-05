@@ -1,6 +1,10 @@
 package com.hendisantika.onlinebanking.controller;
 
-import com.hendisantika.onlinebanking.entity.*;
+import com.hendisantika.onlinebanking.entity.PrimaryAccount;
+import com.hendisantika.onlinebanking.entity.PrimaryTransaction;
+import com.hendisantika.onlinebanking.entity.SavingsAccount;
+import com.hendisantika.onlinebanking.entity.SavingsTransaction;
+import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.service.AccountService;
 import com.hendisantika.onlinebanking.service.TransactionService;
 import com.hendisantika.onlinebanking.service.UserService;
