@@ -33,7 +33,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     public Appointment findAppointment(Long id) {
-        return appointmentDao.findOne(id);
+        return appointmentDao.findById(id).get();
     }
 
     public void confirmAppointment(Long id) {
