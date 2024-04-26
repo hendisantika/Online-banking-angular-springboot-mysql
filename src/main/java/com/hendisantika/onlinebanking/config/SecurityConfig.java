@@ -40,11 +40,10 @@ public class SecurityConfig {
             "/",
             "/about/**",
             "/contact/**",
-            "/error/**/*",
+            "/error/**",
             "/console/**",
             "/signup"
     };
-//    private final UserSecurityService userSecurityService;
 
     private final UserDao userRepository;
 
@@ -73,13 +72,17 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors().disable()
-                .formLogin()
-                .failureUrl("/index?error")
-                .defaultSuccessUrl("/userFront")
-                .loginPage("/index").permitAll()
-                .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/index?logout").deleteCookies("remember-me").permitAll()
-                .and()
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/index").permitAll()
+                        .defaultSuccessUrl("/userFront", true)
+                        .failureUrl("/index?error")
+                )
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/index?logout")
+                        .deleteCookies("remember-me").permitAll()
+                        .logoutSuccessUrl("/login?logout")
+                )
                 .rememberMe().userDetailsService(userDetailsServiceBean);
         return http.build();
     }
