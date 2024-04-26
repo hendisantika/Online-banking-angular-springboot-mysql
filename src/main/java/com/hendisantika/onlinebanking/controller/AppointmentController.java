@@ -4,12 +4,13 @@ import com.hendisantika.onlinebanking.entity.Appointment;
 import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.service.AppointmentService;
 import com.hendisantika.onlinebanking.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
 import java.text.ParseException;
@@ -28,15 +29,14 @@ import java.util.Date;
  */
 @Controller
 @RequestMapping("/appointment")
+@RequiredArgsConstructor
 public class AppointmentController {
 
-    @Autowired
-    private AppointmentService appointmentService;
+    private final AppointmentService appointmentService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @GetMapping(value = "/create")
     public String createAppointment(Model model) {
         Appointment appointment = new Appointment();
         model.addAttribute("appointment", appointment);
@@ -45,7 +45,7 @@ public class AppointmentController {
         return "appointment";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @PostMapping(value = "/create")
     public String createAppointmentPost(@ModelAttribute("appointment") Appointment appointment, @ModelAttribute("dateString") String date, Model model, Principal principal) throws ParseException {
 
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm");

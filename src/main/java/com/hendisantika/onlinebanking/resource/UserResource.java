@@ -5,7 +5,7 @@ import com.hendisantika.onlinebanking.entity.SavingsTransaction;
 import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.service.TransactionService;
 import com.hendisantika.onlinebanking.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +28,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @PreAuthorize("hasRole('ADMIN')")
+@RequiredArgsConstructor
 public class UserResource {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     @RequestMapping(value = "/user/all", method = RequestMethod.GET)
     public List<User> userList() {

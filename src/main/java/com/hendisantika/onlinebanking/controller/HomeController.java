@@ -6,13 +6,12 @@ import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.repository.RoleDao;
 import com.hendisantika.onlinebanking.security.UserRole;
 import com.hendisantika.onlinebanking.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.HashSet;
@@ -29,20 +28,19 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private RoleDao roleDao;
+    private final RoleDao roleDao;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home() {
         return "redirect:/index";
     }
 
-    @RequestMapping("/index")
+    @GetMapping("/index")
     public String index() {
         return "index";
     }

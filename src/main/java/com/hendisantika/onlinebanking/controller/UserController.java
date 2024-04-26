@@ -2,7 +2,7 @@ package com.hendisantika.onlinebanking.controller;
 
 import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,17 +24,15 @@ import java.security.Principal;
  */
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/profile")
     public String profile(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
-
         model.addAttribute("user", user);
-
         return "profile";
     }
 

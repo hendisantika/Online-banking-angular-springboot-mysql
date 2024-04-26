@@ -2,7 +2,7 @@ package com.hendisantika.onlinebanking.resource;
 
 import com.hendisantika.onlinebanking.entity.Appointment;
 import com.hendisantika.onlinebanking.service.AppointmentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,16 +23,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/appointment")
 @PreAuthorize("hasRole('ADMIN')")
+@RequiredArgsConstructor
 public class AppointmentResource {
 
-    @Autowired
-    private AppointmentService appointmentService;
+    private final AppointmentService appointmentService;
 
     @RequestMapping("/all")
     public List<Appointment> findAppointmentList() {
-        List<Appointment> appointmentList = appointmentService.findAll();
-
-        return appointmentList;
+        return appointmentService.findAll();
     }
 
     @RequestMapping("/{id}/confirm")

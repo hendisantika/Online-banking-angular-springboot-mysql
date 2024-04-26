@@ -10,7 +10,7 @@ import com.hendisantika.onlinebanking.repository.SavingsAccountDao;
 import com.hendisantika.onlinebanking.service.AccountService;
 import com.hendisantika.onlinebanking.service.TransactionService;
 import com.hendisantika.onlinebanking.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -28,25 +28,22 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 @Service
+@RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
     private static int nextAccountNumber = 11223101;
 
-    @Autowired
-    private PrimaryAccountDao primaryAccountDao;
+    private final PrimaryAccountDao primaryAccountDao;
 
-    @Autowired
-    private SavingsAccountDao savingsAccountDao;
+    private final SavingsAccountDao savingsAccountDao;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     public PrimaryAccount createPrimaryAccount() {
         PrimaryAccount primaryAccount = new PrimaryAccount();
-        primaryAccount.setAccountBalance(new BigDecimal(0.0));
+        primaryAccount.setAccountBalance(new BigDecimal("0.0"));
         primaryAccount.setAccountNumber(accountGen());
 
         primaryAccountDao.save(primaryAccount);
@@ -56,7 +53,7 @@ public class AccountServiceImpl implements AccountService {
 
     public SavingsAccount createSavingsAccount() {
         SavingsAccount savingsAccount = new SavingsAccount();
-        savingsAccount.setAccountBalance(new BigDecimal(0.0));
+        savingsAccount.setAccountBalance(new BigDecimal("0.0"));
         savingsAccount.setAccountNumber(accountGen());
 
         savingsAccountDao.save(savingsAccount);
