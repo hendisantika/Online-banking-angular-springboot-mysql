@@ -7,6 +7,7 @@ import com.hendisantika.onlinebanking.entity.SavingsTransaction;
 import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.repository.PrimaryAccountDao;
 import com.hendisantika.onlinebanking.repository.SavingsAccountDao;
+import com.hendisantika.onlinebanking.repository.UserDao;
 import com.hendisantika.onlinebanking.service.AccountService;
 import com.hendisantika.onlinebanking.service.TransactionService;
 import com.hendisantika.onlinebanking.service.UserService;
@@ -37,8 +38,7 @@ public class AccountServiceImpl implements AccountService {
 
     private final SavingsAccountDao savingsAccountDao;
 
-    //    @Qualifier("userDetailsService")
-    private final UserService userService;
+    private final UserDao userDao;
 
     private final TransactionService transactionService;
 
@@ -63,7 +63,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     public void deposit(String accountType, double amount, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
+        User user = userDao.findByUsername(principal.getName());
 
         if (accountType.equalsIgnoreCase("Primary")) {
             PrimaryAccount primaryAccount = user.getPrimaryAccount();
@@ -87,7 +87,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     public void withdraw(String accountType, double amount, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
+        User user = userDao.findByUsername(principal.getName());
 
         if (accountType.equalsIgnoreCase("Primary")) {
             PrimaryAccount primaryAccount = user.getPrimaryAccount();
