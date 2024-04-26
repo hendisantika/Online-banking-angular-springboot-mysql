@@ -6,13 +6,8 @@ import com.hendisantika.onlinebanking.entity.Recipient;
 import com.hendisantika.onlinebanking.entity.SavingsAccount;
 import com.hendisantika.onlinebanking.entity.SavingsTransaction;
 import com.hendisantika.onlinebanking.entity.User;
-import com.hendisantika.onlinebanking.repository.PrimaryAccountDao;
-import com.hendisantika.onlinebanking.repository.PrimaryTransactionDao;
-import com.hendisantika.onlinebanking.repository.RecipientDao;
-import com.hendisantika.onlinebanking.repository.SavingsAccountDao;
-import com.hendisantika.onlinebanking.repository.SavingsTransactionDao;
+import com.hendisantika.onlinebanking.repository.*;
 import com.hendisantika.onlinebanking.service.TransactionService;
-import com.hendisantika.onlinebanking.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -37,8 +32,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
-    @Qualifier("userDetailsService")
-    private final UserService userService;
+    private final UserDao userDao;
 
     private final PrimaryTransactionDao primaryTransactionDao;
 
@@ -52,14 +46,14 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
-        User user = userService.findByUsername(username);
+        User user = userDao.findByUsername(username);
         List<PrimaryTransaction> primaryTransactionList = user.getPrimaryAccount().getPrimaryTransactionList();
 
         return primaryTransactionList;
     }
 
     public List<SavingsTransaction> findSavingsTransactionList(String username) {
-        User user = userService.findByUsername(username);
+        User user = userDao.findByUsername(username);
         List<SavingsTransaction> savingsTransactionList = user.getSavingsAccount().getSavingsTransactionList();
 
         return savingsTransactionList;
