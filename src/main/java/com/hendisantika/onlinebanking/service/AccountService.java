@@ -15,6 +15,7 @@ import java.security.Principal;
  * Time: 04.32
  * To change this template use File | Settings | File Templates.
  */
+//@Service("accountService")
 public interface AccountService {
 
     PrimaryAccount createPrimaryAccount();

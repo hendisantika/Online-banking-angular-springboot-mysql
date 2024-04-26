@@ -13,7 +13,8 @@ import com.hendisantika.onlinebanking.repository.SavingsAccountDao;
 import com.hendisantika.onlinebanking.repository.SavingsTransactionDao;
 import com.hendisantika.onlinebanking.service.TransactionService;
 import com.hendisantika.onlinebanking.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -33,25 +34,21 @@ import java.util.stream.Collectors;
  * To change this template use File | Settings | File Templates.
  */
 @Service
+@RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
-    @Autowired
-    private UserService userService;
+    @Qualifier("userDetailsService")
+    private final UserService userService;
 
-    @Autowired
-    private PrimaryTransactionDao primaryTransactionDao;
+    private final PrimaryTransactionDao primaryTransactionDao;
 
-    @Autowired
-    private SavingsTransactionDao savingsTransactionDao;
+    private final SavingsTransactionDao savingsTransactionDao;
 
-    @Autowired
-    private PrimaryAccountDao primaryAccountDao;
+    private final PrimaryAccountDao primaryAccountDao;
 
-    @Autowired
-    private SavingsAccountDao savingsAccountDao;
+    private final SavingsAccountDao savingsAccountDao;
 
-    @Autowired
-    private RecipientDao recipientDao;
+    private final RecipientDao recipientDao;
 
 
     public List<PrimaryTransaction> findPrimaryTransactionList(String username) {

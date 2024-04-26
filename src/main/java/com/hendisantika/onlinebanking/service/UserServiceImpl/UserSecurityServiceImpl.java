@@ -2,9 +2,9 @@ package com.hendisantika.onlinebanking.service.UserServiceImpl;
 
 import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.repository.UserDao;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,12 +21,12 @@ import org.springframework.stereotype.Service;
  * To change this template use File | Settings | File Templates.
  */
 @Service
+@RequiredArgsConstructor
 public class UserSecurityServiceImpl implements UserDetailsService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserSecurityServiceImpl.class);
 
-    @Autowired
-    private UserDao userDao;
+    private final UserDao userDao;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

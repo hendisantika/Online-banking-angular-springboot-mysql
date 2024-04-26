@@ -1,10 +1,15 @@
 package com.hendisantika.onlinebanking.config;
 
+import com.hendisantika.onlinebanking.repository.UserDao;
+import com.hendisantika.onlinebanking.service.UserServiceImpl.UserSecurityServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -41,6 +46,12 @@ public class SecurityConfig {
     };
 //    private final UserSecurityService userSecurityService;
 
+    private final UserDao userRepository;
+
+    public SecurityConfig(UserDao userRepository) {
+        this.userRepository = userRepository;
+    }
+
 //    @Bean(BeanIds.AUTHENTICATION_MANAGER)
 //    public AuthenticationManager authenticationManagerBean() throws Exception {
 //        return authenticationManagerBean();
@@ -54,11 +65,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests().requestMatchers(PUBLIC_MATCHERS).permitAll()
-                .anyRequest().authenticated();
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers(PUBLIC_MATCHERS).permitAll()
+                        .anyRequest().authenticated()
+                );
 
         http
-                .csrf().disable().cors().disable()
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors().disable()
                 .formLogin()
                 .failureUrl("/index?error")
                 .defaultSuccessUrl("/userFront")
@@ -75,5 +89,20 @@ public class SecurityConfig {
 //        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
 //        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder);
 //    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+        authProvider.setUserDetailsService(userDetailsServiceBean());
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return authProvider;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsServiceBean() {
+        return new UserSecurityServiceImpl(userRepository);
+    }
 
 }
