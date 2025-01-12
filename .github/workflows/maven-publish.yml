@@ -25,5 +25,10 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+    - name: Setup Testcontainers Cloud Client
+      uses: atomicjar/testcontainers-cloud-setup-action@v1
+      with:
+        token: ${{ secrets.TC_CLOUD_TOKEN }}
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
