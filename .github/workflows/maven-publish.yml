@@ -29,6 +29,7 @@ jobs:
       uses: atomicjar/testcontainers-cloud-setup-action@v1
       with:
         token: ${{ secrets.TC_CLOUD_TOKEN }}
+        TC_CLOUD_LOGS_TRACE: true
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
