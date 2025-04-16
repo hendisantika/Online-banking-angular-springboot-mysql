@@ -27,8 +27,8 @@ jobs:
 
     - name: Setup Testcontainers Cloud Client
       uses: atomicjar/testcontainers-cloud-setup-action@v1
-      with:
-        token: ${{ secrets.TC_CLOUD_TOKEN }}
+      env:
+        TC_CLOUD_TOKEN: ${{ secrets.TC_CLOUD_TOKEN }}
         TC_CLOUD_LOGS_TRACE: true
 
     - name: Build with Maven
