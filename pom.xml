@@ -123,6 +123,12 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>11.7.2</version>
             </plugin>
+            <!-- SonarQube scanner plugin; invoked with: mvn sonar:sonar -Dsonar.host.url=<url> -Dsonar.login=<token> -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
         </plugins>
     </build>
 
