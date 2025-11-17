@@ -77,12 +77,13 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/userFront", true)
                         .failureUrl("/index?error")
                 )
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/index?logout")
-                        .deleteCookies("remember-me").permitAll()
-                        .logoutSuccessUrl("/login?logout")
-                )
+        .logout(logout -> logout
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            // redirect back to the configured login page ("/index") with logout flag
+            .logoutSuccessUrl("/index?logout")
+            .deleteCookies("remember-me")
+            .permitAll()
+        )
                 .rememberMe().userDetailsService(userDetailsServiceBean);
         return http.build();
     }

@@ -22,7 +22,6 @@ CREATE TABLE savings_transaction
 -- Dumping data for table savings_transaction
 --
 
-LOCK TABLES savings_transaction WRITE;
 INSERT INTO savings_transaction
 VALUES (1, 1000, 1000.00, '2017-01-13 00:57:40', 'Deposit to savings Account', 'Finished', 'Account', 1),
        (2, 150, 2150.00, '2017-01-13 01:11:15', 'Withdraw from savings Account', 'Finished', 'Account', 1),
@@ -31,5 +30,5 @@ VALUES (1, 1000, 1000.00, '2017-01-13 00:57:40', 'Deposit to savings Account', '
        (5, 1500, 2250.00, '2017-01-13 01:13:38', 'Between account transfer from Savings to Primary', 'Finished',
         'Transfer', 1),
        (6, 300, 4250.00, '2017-01-13 01:14:02', 'Transfer to recipient LtdFitness', 'Finished', 'Transfer', 1);
-UNLOCK TABLES;
+-- removed LOCK/UNLOCK from mysqldump
 

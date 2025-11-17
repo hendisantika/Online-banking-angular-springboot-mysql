@@ -19,8 +19,7 @@ CREATE TABLE user_role
 -- Dumping data for table user_role
 --
 
-LOCK TABLES user_role WRITE;
 INSERT INTO user_role
 VALUES (1, 0, 1),
        (2, 1, 2);
-UNLOCK TABLES;
+-- removed LOCK/UNLOCK from mysqldump

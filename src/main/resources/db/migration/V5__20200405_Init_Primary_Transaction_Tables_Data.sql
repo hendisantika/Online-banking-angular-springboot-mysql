@@ -22,7 +22,6 @@ CREATE TABLE primary_transaction
 -- Dumping data for table primary_transaction
 --
 
-LOCK TABLES primary_transaction WRITE;
 INSERT INTO primary_transaction
 VALUES (1, 5000, 5000.00, '2017-01-13 00:57:16', 'Deposit to Primary Account', 'Finished', 'Account', 1),
        (2, 1500, 3500.00, '2017-01-13 00:57:31', 'Withdraw from Primary Account', 'Finished', 'Account', 1),
@@ -34,4 +33,4 @@ VALUES (1, 5000, 5000.00, '2017-01-13 00:57:16', 'Deposit to Primary Account', '
        (7, 2300, 2000.00, '2017-01-13 01:13:48', 'Between account transfer from Primary to Savings', 'Finished',
         'Account', 1),
        (8, 300, 1700.00, '2017-01-13 01:14:14', 'Transfer to recipient TaxSystem', 'Finished', 'Transfer', 1);
-UNLOCK TABLES;
+-- removed LOCK/UNLOCK from mysqldump

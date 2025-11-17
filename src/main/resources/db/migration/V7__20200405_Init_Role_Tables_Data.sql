@@ -14,9 +14,8 @@ CREATE TABLE role
 -- Dumping data for table role
 --
 
-LOCK TABLES ROLE WRITE;
 INSERT INTO role
 VALUES (0, 'ROLE_USER'),
        (1, 'ROLE_ADMIN');
-UNLOCK TABLES;
+-- removed LOCK/UNLOCK from mysqldump
 
