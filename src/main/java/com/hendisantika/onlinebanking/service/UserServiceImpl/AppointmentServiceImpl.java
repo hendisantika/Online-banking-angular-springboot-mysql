@@ -3,7 +3,6 @@ package com.hendisantika.onlinebanking.service.UserServiceImpl;
 import com.hendisantika.onlinebanking.entity.Appointment;
 import com.hendisantika.onlinebanking.repository.AppointmentDao;
 import com.hendisantika.onlinebanking.service.AppointmentService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +18,13 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Service
-@RequiredArgsConstructor
 public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentDao appointmentDao;
+
+    public AppointmentServiceImpl(AppointmentDao appointmentDao) {
+        this.appointmentDao = appointmentDao;
+    }
 
     public Appointment createAppointment(Appointment appointment) {
         return appointmentDao.save(appointment);

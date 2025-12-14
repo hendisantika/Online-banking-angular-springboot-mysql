@@ -6,13 +6,61 @@
 <div class="container main">
     <div class="row">
         <div class="col-lg-12">
-            <!--<h1 class="page-header">Dashboard</h1>-->
+            <h2 class="page-header">Savings Account</h2>
         </div>
-        <!-- /.col-lg-12 -->
     </div>
-    <!-- /.row -->
+
     <div class="row">
         <div class="col-lg-6 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Search Transactions</h3>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{/statement/savings/search}" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="startDate">Start Date</label>
+                                    <input type="date" class="form-control" id="startDate" name="startDate"
+                                           th:value="${startDate != null ? #dates.format(startDate, 'yyyy-MM-dd') : ''}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="endDate">End Date</label>
+                                    <input type="date" class="form-control" id="endDate" name="endDate"
+                                           th:value="${endDate != null ? #dates.format(endDate, 'yyyy-MM-dd') : ''}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="type">Type</label>
+                                    <select class="form-control" id="type" name="type">
+                                        <option value="">All Types</option>
+                                        <option value="Deposit" th:selected="${searchType == 'Deposit'}">Deposit</option>
+                                        <option value="Withdraw" th:selected="${searchType == 'Withdraw'}">Withdraw</option>
+                                        <option value="Transfer" th:selected="${searchType == 'Transfer'}">Transfer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <input type="text" class="form-control" id="description" name="description"
+                                           placeholder="Search description" th:value="${searchDescription}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                        <a th:href="@{/account/savingsAccount}" class="btn btn-default">Clear</a>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="col-lg-6 col-md-6">
             <div class="panel panel-success">
@@ -28,18 +76,18 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <a th:href="@{/statement/savings}" class="btn btn-success btn-sm">
+                        <i class="fa fa-download"></i> Download Statement
+                    </a>
+                    <span class="pull-right">Account #: <span th:text="${savingsAccount.accountNumber}"></span></span>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <!-- /.row -->
-
     <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
+        <table id="example" class="table table-bordered table-hover table-striped">
             <thead>
             <tr>
                 <th>Post Date</th>
@@ -52,12 +100,17 @@
             </thead>
             <tbody>
             <tr data-th-each="savingsTransaction : ${savingsTransactionList}">
-                <td data-th-text="${savingsTransaction.date}">...</td>
+                <td data-th-text="${#dates.format(savingsTransaction.date, 'yyyy-MM-dd HH:mm')}">...</td>
                 <td data-th-text="${savingsTransaction.description}">...</td>
-                <td data-th-text="${savingsTransaction.type}">...</td>
+                <td>
+                    <span th:class="${savingsTransaction.type == 'Deposit' ? 'label label-success' :
+                                      savingsTransaction.type == 'Withdraw' ? 'label label-warning' :
+                                      'label label-info'}"
+                          th:text="${savingsTransaction.type}"></span>
+                </td>
                 <td data-th-text="${savingsTransaction.status}">...</td>
-                <td data-th-text="${savingsTransaction.amount}">...</td>
-                <td data-th-text="${savingsTransaction.availableBalance}">...</td>
+                <td>$<span data-th-text="${#numbers.formatDecimal(savingsTransaction.amount, 1, 2)}">...</span></td>
+                <td>$<span data-th-text="${#numbers.formatDecimal(savingsTransaction.availableBalance, 1, 2)}">...</span></td>
             </tr>
             </tbody>
         </table>
@@ -66,6 +119,12 @@
 
 
 <div th:replace="common/header :: body-bottom-scripts"/>
-
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "order": [[0, "desc"]]
+        });
+    });
+</script>
 </body>
 </html>

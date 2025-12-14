@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Activity Log</h2>
+            <p class="text-muted">View your recent account activities and transactions.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table id="activityTable" class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Activity Type</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>IP Address</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="log : ${activityLogs}">
+                        <td th:text="${#temporals.format(log.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td>
+                            <span th:class="${log.activityType == 'DEPOSIT' ? 'label label-success' :
+                                              log.activityType == 'WITHDRAW' ? 'label label-warning' :
+                                              log.activityType == 'TRANSFER' ? 'label label-info' :
+                                              log.activityType == 'LOGIN' ? 'label label-primary' :
+                                              'label label-default'}"
+                                  th:text="${log.activityType}"></span>
+                        </td>
+                        <td th:text="${log.description}"></td>
+                        <td>
+                            <span th:class="${log.status == 'SUCCESS' ? 'label label-success' : 'label label-danger'}"
+                                  th:text="${log.status}"></span>
+                        </td>
+                        <td th:text="${log.ipAddress != null ? log.ipAddress : 'N/A'}"></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(activityLogs)}">
+                        <td colspan="5" class="text-center">No activity logs found.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <a th:href="@{/userFront}" class="btn btn-default">
+                <i class="fa fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <a th:href="@{/user/settings}" class="btn btn-primary">
+                <i class="fa fa-cog"></i> Account Settings
+            </a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+<script>
+    $(document).ready(function() {
+        $('#activityTable').DataTable({
+            "order": [[0, "desc"]]
+        });
+    });
+</script>
+</body>
+</html>

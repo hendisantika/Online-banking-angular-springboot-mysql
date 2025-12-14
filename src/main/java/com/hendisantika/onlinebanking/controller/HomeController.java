@@ -6,7 +6,6 @@ import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.repository.RoleDao;
 import com.hendisantika.onlinebanking.security.UserRole;
 import com.hendisantika.onlinebanking.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,23 +16,16 @@ import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 04/09/18
- * Time: 06.34
- * To change this template use File | Settings | File Templates.
- */
 @Controller
-@RequiredArgsConstructor
 public class HomeController {
 
     private final UserService userService;
-
     private final RoleDao roleDao;
+
+    public HomeController(UserService userService, RoleDao roleDao) {
+        this.userService = userService;
+        this.roleDao = roleDao;
+    }
 
     @GetMapping("/")
     public String home() {

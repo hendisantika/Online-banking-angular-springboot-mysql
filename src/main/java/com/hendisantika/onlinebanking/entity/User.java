@@ -48,6 +48,10 @@ public class User implements UserDetails {
 
     private boolean enabled = true;
 
+    private Double dailyTransferLimit = 10000.0;
+
+    private Double dailyWithdrawLimit = 5000.0;
+
     @OneToOne
     private PrimaryAccount primaryAccount;
 
@@ -211,5 +215,19 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
+    public Double getDailyTransferLimit() {
+        return dailyTransferLimit;
+    }
 
+    public void setDailyTransferLimit(Double dailyTransferLimit) {
+        this.dailyTransferLimit = dailyTransferLimit;
+    }
+
+    public Double getDailyWithdrawLimit() {
+        return dailyWithdrawLimit;
+    }
+
+    public void setDailyWithdrawLimit(Double dailyWithdrawLimit) {
+        this.dailyWithdrawLimit = dailyWithdrawLimit;
+    }
 }

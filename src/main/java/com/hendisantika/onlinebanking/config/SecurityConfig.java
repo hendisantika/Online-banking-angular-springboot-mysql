@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.security.SecureRandom;
 
@@ -42,7 +41,9 @@ public class SecurityConfig {
             "/contact/**",
             "/error/**",
             "/console/**",
-            "/signup"
+            "/signup",
+            "/password/forgot",
+            "/password/reset"
     };
 
     private final UserDao userRepository;
@@ -67,39 +68,30 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(PUBLIC_MATCHERS).permitAll()
                         .anyRequest().authenticated()
-                );
-
-        http
+                )
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors().disable()
+                .cors(AbstractHttpConfigurer::disable)
                 .formLogin(formLogin -> formLogin
                         .loginPage("/index").permitAll()
                         .defaultSuccessUrl("/userFront", true)
                         .failureUrl("/index?error")
                 )
                 .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/index?logout")
                         .deleteCookies("remember-me").permitAll()
-                        .logoutSuccessUrl("/login?logout")
                 )
-                .rememberMe().userDetailsService(userDetailsServiceBean);
+                .rememberMe(rememberMe -> rememberMe
+                        .userDetailsService(userDetailsServiceBean)
+                );
         return http.build();
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
-//        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder);
-//    }
-
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
-        authProvider.setUserDetailsService(userDetailsServiceBean());
+        UserDetailsService uds = userDetailsServiceBean();
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(uds);
         authProvider.setPasswordEncoder(passwordEncoder());
-
         return authProvider;
     }
 

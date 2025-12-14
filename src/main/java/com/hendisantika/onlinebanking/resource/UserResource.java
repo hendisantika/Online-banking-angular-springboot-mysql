@@ -5,7 +5,6 @@ import com.hendisantika.onlinebanking.entity.SavingsTransaction;
 import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.service.TransactionService;
 import com.hendisantika.onlinebanking.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,25 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 04/09/18
- * Time: 06.39
- * To change this template use File | Settings | File Templates.
- */
 @RestController
 @RequestMapping("/api")
 @PreAuthorize("hasRole('ADMIN')")
-@RequiredArgsConstructor
 public class UserResource {
 
     private final UserService userService;
-
     private final TransactionService transactionService;
+
+    public UserResource(UserService userService, TransactionService transactionService) {
+        this.userService = userService;
+        this.transactionService = transactionService;
+    }
 
     @RequestMapping(value = "/user/all", method = RequestMethod.GET)
     public List<User> userList() {

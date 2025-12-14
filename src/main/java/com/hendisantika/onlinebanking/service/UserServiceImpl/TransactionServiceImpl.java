@@ -8,8 +8,6 @@ import com.hendisantika.onlinebanking.entity.SavingsTransaction;
 import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.repository.*;
 import com.hendisantika.onlinebanking.service.TransactionService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -29,20 +27,25 @@ import java.util.stream.Collectors;
  * To change this template use File | Settings | File Templates.
  */
 @Service
-@RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
     private final UserDao userDao;
-
     private final PrimaryTransactionDao primaryTransactionDao;
-
     private final SavingsTransactionDao savingsTransactionDao;
-
     private final PrimaryAccountDao primaryAccountDao;
-
     private final SavingsAccountDao savingsAccountDao;
-
     private final RecipientDao recipientDao;
+
+    public TransactionServiceImpl(UserDao userDao, PrimaryTransactionDao primaryTransactionDao,
+                                  SavingsTransactionDao savingsTransactionDao, PrimaryAccountDao primaryAccountDao,
+                                  SavingsAccountDao savingsAccountDao, RecipientDao recipientDao) {
+        this.userDao = userDao;
+        this.primaryTransactionDao = primaryTransactionDao;
+        this.savingsTransactionDao = savingsTransactionDao;
+        this.primaryAccountDao = primaryAccountDao;
+        this.savingsAccountDao = savingsAccountDao;
+        this.recipientDao = recipientDao;
+    }
 
 
     public List<PrimaryTransaction> findPrimaryTransactionList(String username) {

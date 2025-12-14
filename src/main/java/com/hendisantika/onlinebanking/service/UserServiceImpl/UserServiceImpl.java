@@ -6,8 +6,8 @@ import com.hendisantika.onlinebanking.repository.UserDao;
 import com.hendisantika.onlinebanking.security.UserRole;
 import com.hendisantika.onlinebanking.service.AccountService;
 import com.hendisantika.onlinebanking.service.UserService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,33 +15,23 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
-
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 10/08/18
- * Time: 06.23
- * To change this template use File | Settings | File Templates.
- */
-@Slf4j
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private static final String SALT = "salt"; // Salt should be protected carefully
+
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserDao userDao;
-
     private final RoleDao roleDao;
-
-    //        private final BCryptPasswordEncoder passwordEncoder;
     private final PasswordEncoder passwordEncoder;
-
-    //@Qualifier("accountService")
     private final AccountService accountService;
+
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao, PasswordEncoder passwordEncoder, AccountService accountService) {
+        this.userDao = userDao;
+        this.roleDao = roleDao;
+        this.passwordEncoder = passwordEncoder;
+        this.accountService = accountService;
+    }
 
 //    @Bean
 //    public BCryptPasswordEncoder passwordEncoder() {

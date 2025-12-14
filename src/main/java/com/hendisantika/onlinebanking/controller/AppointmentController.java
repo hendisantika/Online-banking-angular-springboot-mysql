@@ -4,7 +4,6 @@ import com.hendisantika.onlinebanking.entity.Appointment;
 import com.hendisantika.onlinebanking.entity.User;
 import com.hendisantika.onlinebanking.service.AppointmentService;
 import com.hendisantika.onlinebanking.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,24 +16,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 04/09/18
- * Time: 06.35
- * To change this template use File | Settings | File Templates.
- */
 @Controller
 @RequestMapping("/appointment")
-@RequiredArgsConstructor
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
-
     private final UserService userService;
+
+    public AppointmentController(AppointmentService appointmentService, UserService userService) {
+        this.appointmentService = appointmentService;
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/create")
     public String createAppointment(Model model) {
