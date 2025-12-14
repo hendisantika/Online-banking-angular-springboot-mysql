@@ -61,7 +61,10 @@ public class UserServiceImpl implements UserService {
             user.setPassword(encryptedPassword);
 
             for (UserRole ur : userRoles) {
-                roleDao.save(ur.getRole());
+                // Only save role if it doesn't exist
+                if (!roleDao.existsById(ur.getRole().getRoleId())) {
+                    roleDao.save(ur.getRole());
+                }
             }
 
             user.getUserRoles().addAll(userRoles);
