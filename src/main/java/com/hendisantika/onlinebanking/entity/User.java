@@ -3,15 +3,7 @@ package com.hendisantika.onlinebanking.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hendisantika.onlinebanking.security.Authority;
 import com.hendisantika.onlinebanking.security.UserRole;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -170,14 +162,11 @@ public class User implements UserDetails {
         return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", appointmentList=" + appointmentList +
-                ", recipientList=" + recipientList +
-                ", userRoles=" + userRoles +
+                ", enabled=" + enabled +
                 '}';
     }
 
