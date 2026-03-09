@@ -81,7 +81,7 @@
         <dependency>
             <groupId>com.github.librepdf</groupId>
             <artifactId>openpdf</artifactId>
-            <version>3.0.2</version>
+            <version>3.0.3</version>
         </dependency>
         <!-- Validation -->
         <dependency>
