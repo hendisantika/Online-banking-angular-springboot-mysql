@@ -1,13 +1,76 @@
 version: 2
 updates:
-  - package-ecosystem: maven
-    directory: "/"
-    schedule:
-      interval: daily
-      time: '05:00'
-      timezone: Asia/Jakarta
-    open-pull-requests-limit: 10
-  - package-ecosystem: "github-actions"
+  # Maven dependencies (Spring Boot, OpenPDF, Testcontainers, ...)
+  - package-ecosystem: "maven"
     directory: "/"
     schedule:
       interval: "daily"
+      time: "05:00"
+      timezone: "Asia/Jakarta"
+    open-pull-requests-limit: 10
+    target-branch: "master"
+    labels:
+      - "dependencies"
+      - "java"
+    commit-message:
+      prefix: "build"
+      prefix-development: "build"
+      include: "scope"
+    groups:
+      spring-boot:
+        patterns:
+          - "org.springframework*"
+      testcontainers:
+        patterns:
+          - "org.testcontainers*"
+      maven-minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+        exclude-patterns:
+          - "org.springframework*"
+          - "org.testcontainers*"
+
+  # GitHub Actions used in .github/workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "05:00"
+      timezone: "Asia/Jakarta"
+    open-pull-requests-limit: 5
+    target-branch: "master"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  # Docker base images in Dockerfile
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "05:00"
+      timezone: "Asia/Jakarta"
+    open-pull-requests-limit: 5
+    target-branch: "master"
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "build"
+      include: "scope"
+    ignore:
+      # Stay on the JDK 25 LTS line; only accept patch/minor image updates
+      - dependency-name: "eclipse-temurin"
+        update-types: [ "version-update:semver-major" ]
+      - dependency-name: "maven"
+        update-types: [ "version-update:semver-major" ]
