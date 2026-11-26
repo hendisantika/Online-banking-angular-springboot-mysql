@@ -1,8 +1,14 @@
 # Online-banking-angular-springboot-mysql
 
+[![Maven Package](https://github.com/hendisantika/Online-banking-angular-springboot-mysql/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/hendisantika/Online-banking-angular-springboot-mysql/actions/workflows/maven-publish.yml)
+[![Qodana](https://github.com/hendisantika/Online-banking-angular-springboot-mysql/actions/workflows/qodana_code_quality.yml/badge.svg)](https://github.com/hendisantika/Online-banking-angular-springboot-mysql/actions/workflows/qodana_code_quality.yml)
+![Java](https://img.shields.io/badge/Java-25-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.2-brightgreen?logo=springboot)
+![Dependabot](https://img.shields.io/badge/Dependabot-enabled-blue?logo=dependabot)
+
 Online-Bank-Simulator
 
-Spring Boot 4.0 / Spring Data JPA / Spring Security / Hibernate / MySQL / Thymeleaf / REST
+Java 25 / Spring Boot 4.2 / Spring Data JPA / Spring Security / Hibernate / MySQL / Thymeleaf / REST
 
 The project simulates an online banking system. It allows users to register/login, deposit/withdraw money from accounts, add/edit recipients, transfer money between accounts and recipients, view transactions, make appointments, and more.
 
@@ -35,9 +41,10 @@ There are two roles: **user** and **admin**.
 
 ## Requirements
 
-- Java 21+
+- Java 25 (LTS)
 - MySQL 8.0+
-- Maven 3.8+
+- Maven 3.9+ (or use the bundled Maven Wrapper `./mvnw`)
+- Docker (optional, for containerized run & Testcontainers)
 
 ## Quick Start
 
@@ -70,7 +77,7 @@ spring.mail.password=your-app-password
 
 ### Run the application
 ```bash
-mvn clean spring-boot:run
+./mvnw clean spring-boot:run
 ```
 
 Access the application at [http://localhost:8080](http://localhost:8080)
@@ -94,11 +101,14 @@ Access the application at [http://localhost:8080](http://localhost:8080)
 
 ## Tech Stack
 
-- **Backend:** Spring Boot 4.0, Spring Security 6, Spring Data JPA
+- **Language:** Java 25
+- **Backend:** Spring Boot 4.2, Spring Security, Spring Data JPA
 - **Database:** MySQL with Flyway migrations
 - **Frontend:** Thymeleaf, Bootstrap, jQuery
-- **PDF Generation:** OpenPDF
+- **PDF Generation:** OpenPDF 3.x (`org.openpdf` packages)
 - **Email:** Spring Mail
+- **Testing:** JUnit 5, Testcontainers (MySQL)
+- **Build:** Maven, Docker (multi-stage, Eclipse Temurin 25)
 
 ## API Endpoints
 
@@ -138,6 +148,9 @@ Access the application at [http://localhost:8080](http://localhost:8080)
 docker run --detach --name=bankmysql --env="MYSQL_ROOT_PASSWORD=root" -p 3306:3306 mysql:8
 ```
 
+The `Dockerfile` uses a multi-stage build: `maven:3.9.11-eclipse-temurin-25` compiles the app and
+`eclipse-temurin:25-jre` runs it.
+
 ### Build Docker image
 ```bash
 docker build -t hendisantika/online-banking:latest .
@@ -152,7 +165,7 @@ docker run --detach -p 8080:8080 --link bankmysql:localhost -t hendisantika/onli
 
 ### Build application
 ```bash
-mvn clean package -DskipTests
+./mvnw clean package -DskipTests
 ```
 
 ### Run application
@@ -178,6 +191,17 @@ src/main/resources/
 ├── templates/       # Thymeleaf templates
 └── application.properties
 ```
+
+## CI/CD & Dependency Management
+
+- **Maven Package** (`.github/workflows/maven-publish.yml`) — builds and tests the project on JDK 25 (Temurin) for every push and pull request to `master`.
+- **Qodana** (`.github/workflows/qodana_code_quality.yml`) — static code analysis with JetBrains Qodana (JDK 25).
+- **Dependabot** (`.github/dependabot.yml`) keeps dependencies up to date:
+  | Ecosystem | Schedule | Grouping | Commit prefix |
+  |-----------|----------|----------|---------------|
+  | Maven | daily 05:00 WIB | `spring-boot`, `testcontainers`, `maven-minor-patch` | `build(deps)` |
+  | GitHub Actions | weekly (Monday) | all actions in one PR | `ci(deps)` |
+  | Docker | weekly (Monday) | — (major JDK/Maven bumps ignored) | `build(deps)` |
 
 ## License
 
