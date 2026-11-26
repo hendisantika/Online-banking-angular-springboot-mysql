@@ -1,21 +1,20 @@
-#FROM openjdk
-FROM maven
-MAINTAINER "hendisantika@yahoo.co.id"
-
-## Install maven
-#RUN apt-get update
-#RUN apt-get install -y maven
-
+# ---------- Build stage ----------
+FROM maven:3.9.11-eclipse-temurin-25 AS build
 WORKDIR /code
 
-# Prepare by downloading dependencies
-ADD pom.xml /code/pom.xml
-#RUN ["mvn", "dependency:resolve"]
-# RUN ["mvn", "verify"]
+# Cache dependencies first
+COPY pom.xml .
+RUN mvn -B -q dependency:go-offline
 
-# Adding source, compile and package into a fat jar
-ADD src /code/src
-RUN ["mvn", "package", "-DskipTests"]
+# Build the application
+COPY src ./src
+RUN mvn -B package -DskipTests
+
+# ---------- Runtime stage ----------
+FROM eclipse-temurin:25-jre
+LABEL maintainer="hendisantika@yahoo.co.id"
+WORKDIR /app
+COPY --from=build /code/target/online-banking-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
-CMD ["java", "-jar", "target/online-bank-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,6 +1,7 @@
 version: "1.0"
-linter: jetbrains/qodana-jvm-community:2024.3
+linter: jetbrains/qodana-jvm-community:2025.3
+projectJDK: "25"
 profile:
   name: qodana.recommended
 include:
-  - name: CheckDependencyLicenses
+  - name: CheckDependencyLicenses.idea
